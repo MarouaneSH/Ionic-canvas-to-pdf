@@ -1,26 +1,85 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
 
-## How to use this template
+## Ionic 3 project for converting HTML to PDF
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
+This is a simple repository that show you how to use [jsPDF](https://github.com/MrRio/jsPDF) &  [html2canvas](https://github.com/niklasvh/html2canvas) for generating PDF from HTML using Ionic.
 
-### With the Ionic CLI:
+### Features:
+* Select custom Div element for generating PDF
+* Fixed images issue for not displaying when generating PDF
+* Save PDF to device ( Android / IOS ) 
 
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
+### Installing Dependency
+First of all you need to create an Ionic project , you can follow this [Guide](https://ionicframework.com/getting-started/) , Or you can clone this project .
 
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start myBlank blank
+#### Installing jsPdf
+Open your terminal (inside Ionic Project) and put : 
 ```
-
-Then, to run it, cd into `myBlank` and run:
-
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
+npm install jspdf --save
 ```
+This will install jsPDF inside our ionic apps , but it will not work since we use TypeScript in our project . <br>
+So we need to install @types for jsPDF
+<br>
+```
+npm install @types/jspdf --save
+```
+#### Installing html2Canvas
 
-Substitute ios for android if not on a Mac.
+```
+npm install html2canvas --save
+```
+```
+npm install @types/html2canvas --save
+```
+#### Installing Cordova File Plugin
+You can follow this [Guide](https://ionicframework.com/docs/native/file/)
 
+### Examples : 
+After installing our Dependency , we can import jsPDF and Html2Canvas in TypeScript like this : 
+```
+import * as jsPDF from 'jspdf';
+import * as html2canvas from 'html2canvas';
+```
+##### Simple example 
+```
+import * as jsPDF from 'jspdf';
+import * as html2canvas from 'html2canvas';
+import { File } from '@ionic-native/file';
+
+constructor(private file:File) {
+  }
+  
+ generatePdf(){
+    const div = document.getElementById("Html2Pdf");
+
+    html2canvas(div,{background:"white"}).then((canvas)=>{
+      //Initialize JSPDF
+      var doc = new jsPDF("p","mm","a4");
+      const width = doc.internal.pageSize.width;
+      const height = doc.internal.pageSize.height;
+
+      //Converting canvas to Image
+      let imgData = canvas.toDataURL("image/PNG");
+      //Add image Canvas to PDF
+      doc.addImage(imgData, 'PNG', 20,20,width,height);
+      let pdfOutput = doc.output();
+     
+
+      //This is where the PDF file will stored , you can change it as you like
+      // for more information please visit https://ionicframework.com/docs/native/file/
+      const directory = this.file.externalApplicationStorageDirectory ;
+
+      //Name of pdf
+      const fileName = "example.pdf";
+      
+      //Writing File to Device
+      this.file.writeFile(directory,fileName,pdfOutput)
+      .then((success)=> console.log("File created Succesfully" + JSON.stringify(success)))
+      .catch((error)=> console.log("Cannot Create File " +JSON.stringify(error)));
+  
+  
+    });
+  }
+
+  
+```
