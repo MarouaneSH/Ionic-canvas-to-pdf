@@ -41,7 +41,7 @@ import * as jsPDF from 'jspdf';
 import * as html2canvas from 'html2canvas';
 ```
 ##### Simple example 
-```
+```javascript
 import * as jsPDF from 'jspdf';
 import * as html2canvas from 'html2canvas';
 import { File } from '@ionic-native/file';
