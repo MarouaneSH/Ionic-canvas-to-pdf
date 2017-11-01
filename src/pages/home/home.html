@@ -17,5 +17,5 @@
      <ion-input type="" [(ngModel)]="fileName" ></ion-input>
    </ion-item>
   <button ion-button (click)="generatePdf()" [disabled]="!fileName">Create PDF</button>
- 
+  <button ion-button (click)="checkFile()">Check if PDF Exist</button>
 </ion-content>

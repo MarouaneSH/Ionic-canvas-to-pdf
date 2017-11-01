@@ -59,5 +59,13 @@ export class HomePage {
     });
   }
 
-
+  checkFile(){
+    //check if file exist on device
+    const directory = this.file.externalApplicationStorageDirectory  ;
+    const fileName = this.fileName + ".pdf";
+    this.file.checkFile(directory,fileName)
+    .then((success)=> console.log("PDF file exsit : " + JSON.stringify(success)))
+    .catch((error)=> console.log("Cannot find Pdf file : " +JSON.stringify(error)));
+  }
+ 
 }
