@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { File } from '@ionic-native/file';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-
+import { FileOpener } from '@ionic-native/file-opener';
 @NgModule({
   declarations: [
     MyApp,
@@ -25,7 +25,8 @@ import { HomePage } from '../pages/home/home';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    File
+    File,
+    FileOpener
   ]
 })
 export class AppModule {}

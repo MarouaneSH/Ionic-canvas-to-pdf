@@ -4,7 +4,7 @@ import { NavController } from 'ionic-angular';
 import * as jsPDF from 'jspdf';
 import * as html2canvas from 'html2canvas';
 import { File } from '@ionic-native/file';
-
+import { FileOpener } from '@ionic-native/file-opener';
 
 declare var cordova:any;
 @Component({
@@ -17,7 +17,8 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    private file:File
+    private file:File,
+    private fileOpener : FileOpener
   ) {
 
   }
@@ -52,7 +53,17 @@ export class HomePage {
       
       //Writing File to Device
       this.file.writeFile(directory,fileName,buffer)
-      .then((success)=> console.log("File created Succesfully" + JSON.stringify(success)))
+      .then((success) => {
+        console.log("File created Succesfully" + JSON.stringify(success));
+        //open File
+        this.fileOpener.open(success.nativeURL, "application/pdf")
+        .then((success) =>{
+          console.log("File Opened Succesfully" + JSON.stringify(success));
+        })
+        .catch((error)=> console.log("Cannot Open File " +JSON.stringify(error))); 
+        
+        
+      })
       .catch((error)=> console.log("Cannot Create File " +JSON.stringify(error)));
   
   
