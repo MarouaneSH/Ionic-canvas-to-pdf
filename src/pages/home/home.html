@@ -7,8 +7,14 @@
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+    <div id="Html2Pdf">
+      <h3>This is a Simple Text</h3>
+      <img src="assets/imgs/ionic-meta.jpg" width="200px">
+    </div>
+   <ion-item>
+      <ion-label floating >File Name : </ion-label>
+     <ion-input type="" [(ngModel)]="fileName" ></ion-input>
+   </ion-item>
+  <button ion-button (click)="generatePdf()" [disabled]="!fileName">Create PDF</button>
+ 
 </ion-content>
