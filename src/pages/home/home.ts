@@ -27,13 +27,10 @@ export class HomePage {
   
   generatePdf(){
     const div = document.getElementById("Html2Pdf");
-    var doc = new jsPDF("p","mm","a4");
-    html2canvas(div,{background:"white",height :div.clientHeight , width : div.clientWidth  }).then((canvas)=>{
+    const options = {background:"white",height :div.clientHeight , width : div.clientWidth  };
+    html2canvas(div,options).then((canvas)=>{
       //Initialize JSPDF
-     
-      console.log("HEIGHt : 1  " +  div.offsetHeight + " Client : "+ div.clientHeight);
-      console.log("widht : 1  " +  div.offsetWidth + " Client : "+ div.offsetWidth);
-
+      var doc = new jsPDF("p","mm","a4");
       //Converting canvas to Image
       let imgData = canvas.toDataURL("image/PNG");
       //Add image Canvas to PDF
