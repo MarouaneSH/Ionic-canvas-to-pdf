@@ -2,7 +2,7 @@
 ## Ionic 3 project for converting HTML to PDF
 
 
-This is a simple repository that show you how to use [jsPDF](https://github.com/MrRio/jsPDF) &  [html2canvas](https://github.com/niklasvh/html2canvas) for generating PDF from HTML using Ionic.
+This is a simple repository that show you how to use [jsPDF](https://github.com/MrRio/jsPDF) &  [html2canvas](https://github.com/niklasvh/html2canvas) for generating PDF from HTML using Ionic created By Marouane Souah.
 
 ### Features:
 * Select custom Div element for generating PDF
